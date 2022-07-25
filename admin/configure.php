@@ -4110,8 +4110,8 @@ else:
     <tr>
     <td align="left"><a class="tooltip2" href="#"><?php echo $lang['bm_network'];?>:<span><b>BrandMeister Dashboards</b>Direct links to your BrandMeister Dashboards</span></a></td>
     <td>
-      <a href="https://brandmeister.network/?page=hotspot&amp;id=<?php echo $configmmdvm['General']['Id']; ?>" target="_new" style="color: #000;">Repeater Information</a> |
-      <a href="https://brandmeister.network/?page=hotspot-edit&amp;id=<?php echo $configmmdvm['General']['Id']; ?>" target="_new" style="color: #000;">Edit Repeater (BrandMeister Selfcare)</a>
+      <a href="https://brandmeister.network/?page=device&amp;id=<?php if (isset($configdmrgateway['DMR Network 1']['Id'])) { echo $configdmrgateway['DMR Network 1']['Id']; } else { echo $configmmdvm['General']['Id']; } ?>" target="_new" style="color: #000;">Device Information</a> |
+      <a href="https://brandmeister.network/?page=device-edit&amp;id=<?php if (isset($configdmrgateway['DMR Network 1']['Id'])) { echo $configdmrgateway['DMR Network 1']['Id']; } else { echo $configmmdvm['General']['Id']; } ?>" target="_new" style="color: #000;">Edit Device (BrandMeister Selfcare)</a>
     </td>
     </tr>
     <tr>
@@ -4287,8 +4287,8 @@ else:
     <tr>
     <td align="left"><a class="tooltip2" href="#">'.$lang['bm_network'].':<span><b>BrandMeister Dashboards</b>Direct links to your BrandMeister Dashboards</span></a></td>
     <td>
-      <a href="https://brandmeister.network/?page=hotspot&amp;id='.$configmmdvm['General']['Id'].'" target="_new" style="color: #000;">Repeater Information</a> |
-      <a href="https://brandmeister.network/?page=hotspot-edit&amp;id='.$configmmdvm['General']['Id'].'" target="_new" style="color: #000;">Edit Repeater (BrandMeister Selfcare)</a>
+      <a href="https://brandmeister.network/?page=device&amp;id='; if (isset($configmmdvm['DMR']['Id'])) { echo $configmmdvm['DMR']['Id']; } else { echo $configmmdvm['General']['Id']; }; echo '" target="_new" style="color: #000;">Device Information</a> |
+      <a href="https://brandmeister.network/?page=device-edit&amp;id='; if (isset($configmmdvm['DMR']['Id'])) { echo $configmmdvm['DMR']['Id']; } else { echo $configmmdvm['General']['Id']; }; echo '" target="_new" style="color: #000;">Edit Device (BrandMeister Selfcare)</a>
     </td>
     </tr>'."\n";}
     if (substr($dmrMasterNow, 0, 8) == "FreeDMR_") {
@@ -4329,8 +4329,7 @@ else:
 <?php if ($dmrMasterNow !== "DMRGateway") { ?>
     <tr>
     <td align="left"><a class="tooltip2" href="#">DMR ESSID:<span><b>DMR Extended ID</b>This is the extended ID, to make your DMR ID 8 or 9 digits long</span></a></td>
-    <td align="left">
-<?php
+    <td align="left"><?php
 	if (isset($configmmdvm['DMR']['Id'])) {
 		if (strlen($configmmdvm['DMR']['Id']) > strlen($configmmdvm['General']['Id'])) {
 			$essidLen = strlen($configmmdvm['DMR']['Id']) - strlen($configmmdvm['General']['Id']);
@@ -5230,7 +5229,7 @@ Get your copy of Pi-Star from <a style="color: #ffffff;" href="http://www.pistar
     var selectize = document.querySelectorAll('select')
     var options = {searchable: true};
     selectize.forEach(function(select){
-        if( select.length > 30 && null === select.onchange ) {
+        if( select.length > 30 && null === select.onchange && !select.name.includes("ExtendedId") ) {
             select.classList.add("small", "selectize");
             NiceSelect.bind(select, options);
         }
@@ -5255,7 +5254,7 @@ Get your copy of Pi-Star from <a style="color: #ffffff;" href="http://www.pistar
     var selectize = document.querySelectorAll('select')
     var options = {searchable: true};
     selectize.forEach(function(select){
-        if( select.length > 30 && null === select.onchange ) {
+        if( select.length > 30 && null === select.onchange && !select.name.includes("ExtendedId") ) {
             select.classList.add("small", "selectize");
             NiceSelect.bind(select, options);
         }
